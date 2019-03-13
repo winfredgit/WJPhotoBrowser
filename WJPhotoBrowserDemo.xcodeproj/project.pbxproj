@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7FD7EF4EC0C39276F873848C /* libPods-WJPhotoBrowserDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E9749EDAC49493B8A6104C6 /* libPods-WJPhotoBrowserDemo.a */; };
+		A804B2AA3F674CC441E79E8C /* Pods_WJPhotoBrowserDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2DC6EBDC748E38AC02D69F6 /* Pods_WJPhotoBrowserDemo.framework */; };
 		B74D7AB420C682B90095F7B1 /* wj_icon_play.png in Resources */ = {isa = PBXBuildFile; fileRef = B74D7AB320C682B90095F7B1 /* wj_icon_play.png */; };
 		B7F9E70020C229BC0034B6B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F9E6FF20C229BC0034B6B3 /* AppDelegate.swift */; };
 		B7F9E70220C229BC0034B6B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F9E70120C229BC0034B6B3 /* ViewController.swift */; };
@@ -23,7 +23,6 @@
 /* Begin PBXFileReference section */
 		1D827B3F68F81FF892673AB2 /* Pods-WJPhotoBrowserDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WJPhotoBrowserDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WJPhotoBrowserDemo/Pods-WJPhotoBrowserDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		325635B570C79A7BEB3C2A77 /* Pods-WJPhotoBrowserDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WJPhotoBrowserDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WJPhotoBrowserDemo/Pods-WJPhotoBrowserDemo.release.xcconfig"; sourceTree = "<group>"; };
-		4E9749EDAC49493B8A6104C6 /* libPods-WJPhotoBrowserDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WJPhotoBrowserDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B74D7AB320C682B90095F7B1 /* wj_icon_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wj_icon_play.png; sourceTree = "<group>"; };
 		B7F9E6FC20C229BC0034B6B3 /* WJPhotoBrowserDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WJPhotoBrowserDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F9E6FF20C229BC0034B6B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +36,7 @@
 		B7F9E71820C24AE60034B6B3 /* WJPhotoBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WJPhotoBrowser.swift; sourceTree = "<group>"; };
 		B7F9E71A20C26E9A0034B6B3 /* WJPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WJPhoto.swift; sourceTree = "<group>"; };
 		B7F9E71C20C2727D0034B6B3 /* WJPBCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WJPBCollectionViewCell.swift; sourceTree = "<group>"; };
+		F2DC6EBDC748E38AC02D69F6 /* Pods_WJPhotoBrowserDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WJPhotoBrowserDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FD7EF4EC0C39276F873848C /* libPods-WJPhotoBrowserDemo.a in Frameworks */,
+				A804B2AA3F674CC441E79E8C /* Pods_WJPhotoBrowserDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +89,6 @@
 				B7F9E70620C229BE0034B6B3 /* Assets.xcassets */,
 				B7F9E70820C229BE0034B6B3 /* LaunchScreen.storyboard */,
 				B7F9E70B20C229BE0034B6B3 /* Info.plist */,
-				B7F9E71420C23DF80034B6B3 /* WJPhotoBrowserDemo-Bridging-Header.h */,
 			);
 			path = WJPhotoBrowserDemo;
 			sourceTree = "<group>";
@@ -101,6 +100,7 @@
 				B7F9E71C20C2727D0034B6B3 /* WJPBCollectionViewCell.swift */,
 				B7F9E71A20C26E9A0034B6B3 /* WJPhoto.swift */,
 				B74D7AB320C682B90095F7B1 /* wj_icon_play.png */,
+				B7F9E71420C23DF80034B6B3 /* WJPhotoBrowserDemo-Bridging-Header.h */,
 			);
 			path = WJPhotoBrowser;
 			sourceTree = "<group>";
@@ -108,7 +108,7 @@
 		C3E928A63D45860E1D2CD496 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4E9749EDAC49493B8A6104C6 /* libPods-WJPhotoBrowserDemo.a */,
+				F2DC6EBDC748E38AC02D69F6 /* Pods_WJPhotoBrowserDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -209,9 +209,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WJPhotoBrowserDemo/Pods-WJPhotoBrowserDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -401,7 +404,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.winfred.WJPhotoBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "WJPhotoBrowserDemo/WJPhotoBrowserDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WJPhotoBrowserDemo/WJPhotoBrowser/WJPhotoBrowserDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -424,7 +427,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.winfred.WJPhotoBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "WJPhotoBrowserDemo/WJPhotoBrowserDemo-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WJPhotoBrowserDemo/WJPhotoBrowser/WJPhotoBrowserDemo-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -22,7 +22,7 @@ class WJPhotoBrowser: UIWindow, UICollectionViewDataSource, UICollectionViewDele
     private var photos = [WJPhoto]()
     private var currentPage = 0
     private let pageMargin = 20.0
-    var delegate: WJPhotoBrowserDelegate?
+    weak var delegate: WJPhotoBrowserDelegate?
     // 拖动图片使用属性
     var startLocation = CGPoint(x: 0, y: 0)
     var startCenter = CGPoint(x: 0, y: 0)
@@ -65,7 +65,11 @@ class WJPhotoBrowser: UIWindow, UICollectionViewDataSource, UICollectionViewDele
         pageControl.frame = CGRect(x: 0, y: mainFrame.height-60, width: mainFrame.width, height: 10)
         pageControl.numberOfPages = self.photos.count
         pageControl.currentPage = currentPage
-        pageControl.isHidden = self.photos.count > 1 ? false : true
+        if self.photos.count < 1 || self.photos.count > 19 {
+            pageControl.isHidden = true
+        } else {
+            pageControl.isHidden = false
+        }
         addSubview(pageControl)
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(drag(_:)))
         self.addGestureRecognizer(panGesture)
@@ -97,16 +101,20 @@ class WJPhotoBrowser: UIWindow, UICollectionViewDataSource, UICollectionViewDele
             // 获取来源view
             let indexPath = self.collectionView.indexPath(for: pbCell)
             let imageSuperView = delegate!.photoBrowser(self, imageSuperViewAt: indexPath!.row)
-            // 转换来源view相对在window的frame
-            let finalFrame = imageSuperView.convert(imageSuperView.bounds, to: UIApplication.shared.keyWindow)
-            UIView.animate(withDuration: 0.25,
-                           delay: 0,
-                           options: [.beginFromCurrentState, .curveEaseInOut],
-                           animations: {
-                            pbCell.imageView.frame = finalFrame
-                            pbCell.playerLayer?.frame = finalFrame
-            }) {
-                (isFinished) in
+            if imageSuperView.frame.width > 0 && imageSuperView.frame.height > 0 {
+                // 转换来源view相对在window的frame
+                let finalFrame = imageSuperView.convert(imageSuperView.bounds, to: UIApplication.shared.keyWindow)
+                UIView.animate(withDuration: 0.25,
+                               delay: 0,
+                               options: [.beginFromCurrentState, .curveEaseInOut],
+                               animations: {
+                                pbCell.imageView.frame = finalFrame
+                                pbCell.playerLayer?.frame = finalFrame
+                }) {
+                    (isFinished) in
+                    self.dismiss()
+                }
+            } else {
                 self.dismiss()
             }
         } else {
@@ -115,8 +123,12 @@ class WJPhotoBrowser: UIWindow, UICollectionViewDataSource, UICollectionViewDele
     }
     
     private func dismiss() {
-        isHidden = true
-        resignKey()
+        UIView.animate(withDuration: 0.1, animations: {
+            self.alpha = 0.1
+        }) { (isFinished) in
+            self.isHidden = true
+            self.resignKey()
+        }
     }
     
     @objc private func drag(_ gesture: UIPanGestureRecognizer) {
@@ -208,19 +220,21 @@ class WJPhotoBrowser: UIWindow, UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         // cell还未展示，才显示动画
         if delegate != nil && collectionView.visibleCells.count == 0 {
-            let pbCell = cell as! WJPBCollectionViewCell
             let imageSuperView = delegate!.photoBrowser(self, imageSuperViewAt: indexPath.row)
-            let originFrame = imageSuperView.convert(imageSuperView.bounds, to: UIApplication.shared.keyWindow)
-            let finalFrame = pbCell.imageView.frame
-            pbCell.imageView.frame = originFrame
-            UIView.animate(withDuration: 0.25,
-                           delay: 0,
-                           options: [.beginFromCurrentState, .curveEaseInOut],
-                           animations: {
-                            pbCell.imageView.frame = finalFrame
-            }) {
-                (isFinished) in
-                
+            if imageSuperView.frame.width > 0 && imageSuperView.frame.height > 0 {
+                let pbCell = cell as! WJPBCollectionViewCell
+                let originFrame = imageSuperView.convert(imageSuperView.bounds, to: UIApplication.shared.keyWindow)
+                let finalFrame = pbCell.imageView.frame
+                pbCell.imageView.frame = originFrame
+                UIView.animate(withDuration: 0.25,
+                               delay: 0,
+                               options: [.beginFromCurrentState, .curveEaseInOut],
+                               animations: {
+                                pbCell.imageView.frame = finalFrame
+                }) {
+                    (isFinished) in
+                    
+                }
             }
         }
     }

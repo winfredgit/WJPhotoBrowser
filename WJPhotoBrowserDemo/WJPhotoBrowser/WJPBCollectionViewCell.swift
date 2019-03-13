@@ -1,4 +1,3 @@
-
 //
 //  WJPBCollectionViewCell.swift
 //  WJPhotoBrowserDemo
@@ -25,6 +24,7 @@ class WJPBCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
     var delegate: WJPBCellDelegate?
     var originImageFrame: CGRect?
     var playUrl: String?
+    var playerItem: AVPlayerItem?
     var player: AVPlayer?
     var isZoom = false          // 图片是否放大
     
@@ -39,6 +39,7 @@ class WJPBCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        playerItem?.removeObserver(self, forKeyPath: "status")
     }
     
     // MARK: - UI
@@ -151,7 +152,7 @@ class WJPBCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
                     playButton.isHidden = true
                     loadingView.startAnimating()
                     loadingView.isHidden = false
-                    let playerItem = AVPlayerItem(url: url)
+                    playerItem = AVPlayerItem(url: url)
                     player = AVPlayer(playerItem: playerItem)
                     playerLayer = AVPlayerLayer(player: player!)
                     playerLayer!.frame = CGRect(x: 0,
@@ -161,10 +162,10 @@ class WJPBCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
                     browserScrollView.layer.addSublayer(playerLayer!)
                     player!.play()
                     // 观察视频播放状态
-                    playerItem.addObserver(self,
-                                           forKeyPath: "status",
-                                           options: .new,
-                                           context: nil)
+                    playerItem!.addObserver(self,
+                                            forKeyPath: "status",
+                                            options: .new,
+                                            context: nil)
                     // 观察视频播放结束
                     NotificationCenter.default.addObserver(self,
                                                            selector: #selector(playOver),
@@ -193,9 +194,12 @@ class WJPBCollectionViewCell: UICollectionViewCell, UIScrollViewDelegate {
     }
     
     @objc private func playOver() {
-        playButton.isHidden = false
         playerLayer?.removeFromSuperlayer()
+        playerLayer = nil
         player = nil
+        playerItem?.removeObserver(self, forKeyPath: "status")
+        playerItem = nil
+        playButton.isHidden = false
         imageView.isHidden = false
         NotificationCenter.default.removeObserver(self,
                                                   name: Notification.Name.AVPlayerItemDidPlayToEndTime,
