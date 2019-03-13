@@ -65,7 +65,7 @@ class WJPhotoBrowser: UIWindow, UICollectionViewDataSource, UICollectionViewDele
         pageControl.frame = CGRect(x: 0, y: mainFrame.height-60, width: mainFrame.width, height: 10)
         pageControl.numberOfPages = self.photos.count
         pageControl.currentPage = currentPage
-        if self.photos.count < 1 || self.photos.count > 19 {
+        if self.photos.count < 2 || self.photos.count > 19 {
             pageControl.isHidden = true
         } else {
             pageControl.isHidden = false
